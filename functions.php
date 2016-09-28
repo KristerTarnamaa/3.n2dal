@@ -50,8 +50,8 @@
 				$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]); 
 				 $stmt = $mysqli->prepare("
 				  
-					SELECT id, email, password, created
-					FROM user_sample
+					SELECT id, email, password, sugu, Lemmikauto, created
+					FROM kodutoo_KrisTarn
 					WHERE email = ?
 					
 				 ");
@@ -61,7 +61,7 @@
 				 $stmt->bind_param("s", $email);
 				
 				//rea kohta tulba väärtus
-				$stmt->bind_result($id, $emailFromDb, $passwordFromDb, $created)
+				$stmt->bind_result($id, $emailFromDb, $passwordFromDb, $suguFromDb, $autoFromDb, $created);
 				
 				$stmt->execute();
 				
@@ -69,7 +69,7 @@
 				if($stmt->fetch()){
 					//oli olemas, rida käes
 					//kasutaja sisestas sisselogimiseks
-					$hash = hash("sha512", $password)
+					$hash = hash("sha512", $password);
 					
 					if ($hash == $passwordFromDb) {
 						
@@ -86,7 +86,7 @@
 				} else {
 					
 					//ei olnud ühtegi rida
-					echo "Sellise emailiga: $email kasutajat ei ole olemas."
+					echo "Sellise emailiga: $email kasutajat ei ole olemas.";
 				}
 	}
 	

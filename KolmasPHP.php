@@ -34,20 +34,6 @@
 		}
 	}
 		}
-		if (isset ($_POST["LoginEmail"])){
-		
-		if (empty ($_POST["LoginEmail"])) {
-			
-			$LoginEmailError= "V2li on kohustuslik";
-		}
-	}
-		if (isset ($_POST["loginPassword"])){
-		
-		if (empty ($_POST["loginPassword"])) {
-			
-			$loginPasswordError = "V2li on kohustuslik";
-		}
-	}
 	
 		if ( $signupEmailError == "" && 
 			 $signupPasswordError == "" && 
@@ -65,7 +51,20 @@
 				 signup($signupEmail, $password, $sugu, $auto); //sugu ja auto siia! Config.php ja functions.php-le muudatused (uus andmebaas 'n shiz)!
 			 }
 			
-			
+		//kas kasutaja tahab sisse logida
+		
+		echo $_POST["LoginEmail"]."<br>";
+		
+		echo $_POST["loginPassword"];
+		
+		if (isset($_POST["LoginEmail"]) &&
+			isset($_POST["loginPassword"]) &&
+			!empty($_POST["LoginEmail"]) &&
+			!empty($_POST["loginPassword"]) ) {
+				echo "kõik on korras: ";
+				login($_POST["LoginEmail"], $_POST["loginPassword"]);
+			}
+		
 			
 		
 	
